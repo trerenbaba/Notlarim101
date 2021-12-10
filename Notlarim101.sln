@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notlarim101.WebApp", "Notlarim101.WebApp\Notlarim101.WebApp.csproj", "{2D3E94BE-A86B-4BBF-A41F-DD6B4ED68311}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D3E94BE-A86B-4BBF-A41F-DD6B4ED68311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D3E94BE-A86B-4BBF-A41F-DD6B4ED68311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D3E94BE-A86B-4BBF-A41F-DD6B4ED68311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D3E94BE-A86B-4BBF-A41F-DD6B4ED68311}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77A034D0-B1C6-46D7-97FE-C512D547D8C4}
+	EndGlobalSection
+EndGlobal
