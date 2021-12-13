@@ -6,24 +6,46 @@
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-xl-3 justify-content-center">
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
                     <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                     <!-- Product details-->
-                    <div class="card-body p-4">
+                    <div class="card-body py-4 px-1">
                         <div class="text-center">
                             <!-- Product name-->
-                            <h5 class="fw-bolder">Fancy Product</h5>
-                            <!-- Product price-->
-                            $40.00 - $80.00
+                            <h5 class="fw-bolder">İlk Yazım</h5>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <i class="far fa-user"></i> Eren Baba
+                                </div>
+                                <div>
+                                    <i class="far fa-clock"> 01.01.2022 23:06</i>
+                                </div>
+                            </div>
+                            <hr />
+                            <p class="card-text">
+                                In malesuada semper mi, id sollicitudin urna fermentum ut fusce varius nisl.
+                            </p>
                         </div>
                     </div>
                     <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    @*<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>
-                    </div>
+                    </div>*@
+                <div class="bg-transparent d-flex justify-content-between">
+                    <p>
+                        <button type="button" class="btn btn-outline-light text-dark btn-sm">
+                            <i class="bi-star text-danger"></i>15
+                        </button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-outline-light text-dark btn-sm">
+                            <i class="bi bi-chat-left-dots-fill text-danger"></i>Yorumlar
+                        </button>
+                    </p>
+                </div>
                 </div>
             </div>
             <div class="col mb-5">

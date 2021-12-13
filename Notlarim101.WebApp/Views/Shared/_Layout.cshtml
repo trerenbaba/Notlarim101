@@ -13,7 +13,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
 
     <link href="~/Content/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 </head>
 <body>
     <!-- Navigation-->
@@ -65,8 +65,38 @@
         </div>
     </header>
 
-    <div class="container body-content">
-        @RenderBody()
+    <div class="container-fluid body-content">
+        <div class="row">
+            <div class="col-md-2">
+                <p class="lead mt-5"><span class="fw-bolder">Kategoriler</span></p>
+                <div class="list-group ">
+                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                        <span> <i class="fas fa-angle-double-right"></i></span>
+                        Tümü
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <span> <i class="fas fa-angle-double-right"></i></span>
+                        Category-1
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <span> <i class="fas fa-angle-double-right"></i></span>
+                        Category-2
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">
+                        <span> <i class="fas fa-angle-double-right"></i></span>
+                        Category-3
+                    </a>
+                    <a class="list-group-item list-group-item-action disabled">
+                        <span> <i class="fas fa-angle-double-right"></i></span>
+                        Category-4
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
+        </div>
+        
         <hr />
         
     </div>
@@ -77,12 +107,14 @@
                 <h5>Site Haritası</h5>
                 <hr />
                 <p class="m-0 text-center text-white">
-                    <a href="#">Hakkımızda</a>
-                    <a href="#">En Beğenilenler</a>
-                    <a href="#">Son Yazılanlar</a>
+                    <a href="#">Hakkımızda</a> <br />
+                    <a href="#">En Beğenilenler</a><br />
+                    <a href="#">Son Yazılanlar</a> <br />
                 </p>
             </div>
-            <div class="container col-lg-4" >
+            <div class="container col-lg-4 text-center text-white" >
+                <h5>Notlarım - 101</h5>
+                <hr />
                 <p class="m-0 text-center text-white">Copyright &copy; Your Website @DateTime.Now.Year</p>
             </div>
             <div class="container col-lg-4 text-white text-center">
