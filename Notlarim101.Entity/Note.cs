@@ -25,6 +25,11 @@ namespace Notlarim101.Entity
         public virtual List<Comment> Comments { get; set; }
         public virtual List<Liked> Likes { get; set; }
 
+        public Note()
+        {
+            Comments = new List<Comment>();
+            Likes = new List<Liked>();
+        }
 
     }
 }

@@ -14,7 +14,6 @@ namespace Notlarim101.Entity
         [Required,StringLength(300)]
         public string Text { get; set; }
         public virtual Note Note { get; set; }
-
         public virtual NotlarimUser Owner { get; set; }
 
 
