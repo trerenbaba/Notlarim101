@@ -1,4 +1,5 @@
 ﻿using Notlarim101.DataAccessLayer;
+using Notlarim101.DataAccessLayer.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,28 +8,27 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Notlarim101.BusinessLayer
+namespace Notlarim101.DataAccessLayer.EntityFramework
 {
-    public class Repository<T> where T:class // T nesnesi referans type  olmalıdır.Classlar da referans type olduğu için kısıltlamak için kullanılmıştır.
+    public class Repository<T>:RepositoryBase,IRepository<T> where T : class // T nesnesi referans type  olmalıdır.Classlar da referans type olduğu için kısıtlamak için kullanılmıştır.
     {
-        NotlarimContext db = new NotlarimContext();
-        DbSet<T> objSet;
+        private DbSet<T> objSet;
 
         public Repository()
         {
             objSet = db.Set<T>();
         }
-        
+
         public List<T> List()
         {
             //Set(içine sadece referans tipler verilir)
             return objSet.ToList();
         }
-        public List<T> List(Expression<Func<T,bool>> where)
+        public List<T> List(Expression<Func<T, bool>> where)
         {
             return objSet.Where(where).ToList();
         }
-        public IQueryable<T> QList(Expression<Func<T,bool>> query)
+        public IQueryable<T> QList(Expression<Func<T, bool>> query)
         {
             return objSet.Where(query);
         }
@@ -51,6 +51,10 @@ namespace Notlarim101.BusinessLayer
         public int Save()
         {
             return db.SaveChanges();
+        }
+        public T Find(Expression<Func<T, bool>> find)
+        {
+            return objSet.FirstOrDefault(find);
         }
     }
 }

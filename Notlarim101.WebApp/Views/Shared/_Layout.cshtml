@@ -68,29 +68,7 @@
     <div class="container-fluid body-content">
         <div class="row">
             <div class="col-md-2">
-                <p class="lead mt-5"><span class="fw-bolder">Kategoriler</span></p>
-                <div class="list-group ">
-                    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                        <span> <i class="fas fa-angle-double-right"></i></span>
-                        Tümü
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <span> <i class="fas fa-angle-double-right"></i></span>
-                        Category-1
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <span> <i class="fas fa-angle-double-right"></i></span>
-                        Category-2
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <span> <i class="fas fa-angle-double-right"></i></span>
-                        Category-3
-                    </a>
-                    <a class="list-group-item list-group-item-action disabled">
-                        <span> <i class="fas fa-angle-double-right"></i></span>
-                        Category-4
-                    </a>
-                </div>
+                @Html.Partial("_PartialCategories")
             </div>
             <div class="col-md-10">
                 @RenderBody()

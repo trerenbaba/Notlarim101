@@ -13,6 +13,10 @@ namespace Notlarim101.WebApp.Controllers
         public ActionResult Index()
         {
             Test test = new Test();
+            //test.InsertTest();
+            //test.UpdateTest();
+            //test.DeleteTest();
+            test.CommentTest();
             return View();
         }
         
