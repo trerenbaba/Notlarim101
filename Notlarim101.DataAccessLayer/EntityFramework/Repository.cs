@@ -1,4 +1,5 @@
-﻿using Notlarim101.DataAccessLayer;
+﻿using Notlarim101.Core.DataAccess;
+using Notlarim101.DataAccessLayer;
 using Notlarim101.DataAccessLayer.Abstract;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Notlarim101.DataAccessLayer.EntityFramework
 {
-    public class Repository<T>:RepositoryBase,IRepository<T> where T : class // T nesnesi referans type  olmalıdır.Classlar da referans type olduğu için kısıtlamak için kullanılmıştır.
+    public class Repository<T>:RepositoryBase,IDataAccess<T> where T : class // T nesnesi referans type  olmalıdır.Classlar da referans type olduğu için kısıtlamak için kullanılmıştır.
     {
         private DbSet<T> objSet;
 

@@ -12,12 +12,14 @@ namespace Notlarim101.WebApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            Test test = new Test();
-            //test.InsertTest();
-            //test.UpdateTest();
-            //test.DeleteTest();
-            test.CommentTest();
-            return View();
+            //Test test = new Test();
+            ////test.InsertTest();
+            ////test.UpdateTest();
+            ////test.DeleteTest();
+            //test.CommentTest();
+            NoteManager nm = new NoteManager();
+            
+            return View(nm.List());
         }
         
     }

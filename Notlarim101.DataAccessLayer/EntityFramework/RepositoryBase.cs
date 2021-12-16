@@ -16,7 +16,7 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
         {
             CreateContext();
         }
-        private static void CreateContext()
+        private static NotlarimContext CreateContext()
         {
             if (db==null)
             {
@@ -28,6 +28,7 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
                     }
                 }
             }
+            return db;
         }
     }
 }
