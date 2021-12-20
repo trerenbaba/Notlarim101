@@ -11,37 +11,47 @@ namespace Notlarim101.BusinessLayer
 {
     public class CategoryManager :ManagerBase<Category>
     {
-        //Repository<Category> rcat = new Repository<Category>();
-        //public List<Category> GetCategories()
-        //{
-        //    return rcat.List();
-        //}
+        private Repository<Category> rcat = new Repository<Category>();
 
-        public override int Delete(Category obj)
+        public List<Category> GetCategories()
         {
-            NoteManager nm = new NoteManager();
-            //LikedManager
-            //CommentManager bu magagerlarinda new leyeceğiz
-
-            //Kategor ile ilişkili notların silinmesi gerekecek
-
-            foreach (Note note in obj.Notes.ToList())
-            {
-                //Note ile ilişkili Likeların silinmesi
-                foreach (Liked like in note.Likes.ToList())
-                {
-                    //delete
-                }
-
-                //Note ile ilişkili Commentların silinmesi
-                foreach (Comment comment in note.Comments.ToList())
-                {
-                    //delete
-                }
-                //nm.Delete(note);
-            }
-
-            return base.Delete(obj);
+            return rcat.List();
         }
+
+        public Category GetCategoryById(int id)
+        {
+            return rcat.Find(s => s.Id == id);
+        }
+        public Category GetCategoryByTitle(string title)
+        {
+            return rcat.Find(s => s.Title == title);
+        }
+
+        //public override int Delete(Category obj)
+        //{
+        //    NoteManager nm = new NoteManager();
+
+        //    //LikedManager
+        //    //CommentManager bu managerlarida new leyecegiz.
+
+        //    //Kategori ile iliskili notlarin silinmesi gerekecek
+        //    foreach (Note note in obj.Notes.ToList())
+        //    {
+        //        //Note ile iliskili Like larin silinmesi
+        //        foreach (Liked like in note.Likes.ToList())
+        //        {
+        //            //lm.delete
+        //        }
+
+        //        //Note ile iliskili Comment larin silinmesi
+        //        foreach (Comment comment in note.Comments.ToList())
+        //        {
+        //            //comm.delete
+        //        }
+
+        //        //nm.Delete(note);
+        //    }
+        //    return base.Delete(obj);
+        //}
     }
 }

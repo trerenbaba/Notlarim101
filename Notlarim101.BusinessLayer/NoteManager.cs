@@ -11,10 +11,11 @@ namespace Notlarim101.BusinessLayer
 {
     public class NoteManager : ManagerBase<Note>
     {
-        //Repository<Note> rnote = new Repository<Note>();
-        //public List<Note> GetAllNotes()
-        //{
-        //    return rnote.List();
-        //}
+        private Repository<Note> rnote = new Repository<Note>();
+
+        public List<Note> GetAllNotes()
+        {
+            return rnote.List();
+        }
     }
 }
