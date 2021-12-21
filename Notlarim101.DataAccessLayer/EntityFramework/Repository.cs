@@ -1,6 +1,7 @@
 ﻿using Notlarim101.Core.DataAccess;
 using Notlarim101.DataAccessLayer;
 using Notlarim101.DataAccessLayer.Abstract;
+using Notlarim101.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -37,10 +38,26 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
         public int Insert(T obj)
         {
             objSet.Add(obj);
+            if (obj is MyEntityBase)
+            {
+                MyEntityBase o = obj as MyEntityBase; // ARAŞTIRRRR
+                
+                DateTime now = DateTime.Now;
+                o.CreatedOn = now;
+                o.ModifiedOn = now;
+                o.ModifiedUsername = "system"; 
+            }
             return Save();
         }
         public int Update(T obj)
         {
+            if (obj is MyEntityBase)
+            {
+                MyEntityBase o = obj as MyEntityBase;
+                DateTime now = DateTime.Now;
+                o.ModifiedOn = now;
+                o.ModifiedUsername = "system";
+            }
             return Save();
         }
         public int Delete(T obj)
