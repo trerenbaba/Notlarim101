@@ -1,4 +1,5 @@
 ﻿using Notlarim101.BusinessLayer.Abstract;
+using Notlarim101.Common.Helper;
 using Notlarim101.DataAccessLayer.EntityFramework;
 using Notlarim101.Entity;
 using Notlarim101.Entity.Messages;
@@ -58,6 +59,11 @@ namespace Notlarim101.BusinessLayer
                 if (dbResult > 0)
                 {
                     lr.Result = ruser.Find(s => s.Email == data.Email && s.UserName == data.Username);
+                    string siteUri = ConfigHelper.Get<string>("SiteRootUri");
+                    string activateUri = $"{siteUri}/Home/UserActivate/{lr.Result.ActivateGuid}";
+                    string body = $"Merhaba {lr.Result.UserName}; <br><br> Hesabınızı aktifleştirmek için <a href='{activateUri}' target='_blank'>tıklayın</a>.";
+                    MailHelper.SendMail(body, lr.Result.Email, "Notlarim101 hesap aktifleştirme");
+
                         //activasyon maili atılacak
                         //lr.Result.ActivateGuid;
                 }
@@ -90,5 +96,29 @@ namespace Notlarim101.BusinessLayer
             return res;
 
         }
+
+        public BusinessLayerResult<NotlarimUser> ActivateUser(Guid id) //Route.config id yazdığı için id yazıyoruz. Başka isim yazarsak kabul etmiyor.
+        {
+            BusinessLayerResult<NotlarimUser> res = new BusinessLayerResult<NotlarimUser>();
+            res.Result = ruser.Find(x => x.ActivateGuid == id);
+
+            if (res.Result!=null)
+            {
+                if (res.Result.IsActive)
+                {
+                    res.AddError(ErrorMessageCode.UserAlreadyActive, "Bu hesap daha önce aktif edilmiş!!!");
+                    return res;
+                }
+                res.Result.IsActive = true;
+                ruser.Update(res.Result);
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.ActivateIdDoesNotExist, "Sal beni!!");
+            }
+            return res;
+
+        }
+
     }
 }
