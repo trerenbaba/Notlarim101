@@ -10,10 +10,18 @@
     <div class="logreg">
         <main class="form-signin">
             <form>
-                <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+                <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="140" height="128">
                 <h1 class="h3 mb-3 fw-normal">Giriş Formu</h1>
 
                 @Html.ValidationSummary(false)
+                <div class="form-floating">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Şifre Tekrar", id = "floatingNameInput" })
+                    <label for="floatingNameInput">Ad</label>
+                </div>
+                <div class="form-floating">
+                    @Html.TextBoxFor(model => model.SurName, new { @class = "form-control", placeholder = "Şifre Tekrar", id = "floatingSurnameInput" })
+                    <label for="floatingSurnameInput">Soyad</label>
+                </div>
                 <div class="form-floating">
                     @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Kullanıcı Adı", id = "floatingInput" })
                     <label for="floatingInput">Kullanıcı Adı</label>
@@ -26,17 +34,18 @@
                 <div class="form-floating">
                     @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre", id = "floatingPassword", type = "password" })
                     <label for="floatingPassword">Şifre</label>
-                </div>
+                </div>  
                 <div class="form-floating">
-                    @Html.TextBoxFor(model => model.RePassword, new { @class = "form-control", placeholder = "Şifre Tekrar", id = "floatingPassword", type = "password" })
+                    @Html.TextBoxFor(model => model.RePassword, new { @class = "form-control", placeholder = "Şifre Tekrar", id = "floatingRePassword", type = "password" })
                     <label for="floatingPassword">Şifre</label>
                 </div>
 
+
                 @*<div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                    </div>*@
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>*@
                 <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
                 <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
             </form>

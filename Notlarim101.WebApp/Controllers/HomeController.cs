@@ -1,5 +1,6 @@
 ﻿using Notlarim101.BusinessLayer;
 using Notlarim101.Entity;
+using Notlarim101.Entity.Messages;
 using Notlarim101.Entity.ValueObject;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,11 @@ namespace Notlarim101.WebApp.Controllers
                 BusinessLayerResult<NotlarimUser> res = num.LoginUser(model);
                 if (res.Errors.Count>0)
                 {
-                    res.Errors.ForEach(s => ModelState.AddModelError("", s.Key.ToString()));
+                    if (res.Errors.Find(x=>x.Code==ErrorMessageCode.UserIsNotActive)!=null)
+                    {
+                        ViewBag.SetLink = "https://Home/UserActivate/1234-2345-234567";
+                    }
+                    res.Errors.ForEach(s => ModelState.AddModelError("", s.Message));
                     return View(model);
                 }
                 //yönlendirme
@@ -104,7 +109,7 @@ namespace Notlarim101.WebApp.Controllers
 
                 if (res.Errors.Count>0)
                 {
-                    res.Errors.ForEach(s => ModelState.AddModelError("", s.Key.ToString()));
+                    res.Errors.ForEach(s => ModelState.AddModelError("", s.Message));
                     return View(model);
                 }
 

@@ -9,6 +9,16 @@ namespace Notlarim101.Entity.ValueObject
 {
     public class RegisterViewModel
     {
+        [DisplayName("Ad"),
+         Required(ErrorMessage = "{0} alanı boş geçilemez."),
+         StringLength(30, ErrorMessage = "{0} max. {1} karakter olmalı.")]
+        public string Name { get; set; }
+
+        [DisplayName("Soyad"),
+         Required(ErrorMessage = "{0} alanı boş geçilemez."),
+         StringLength(30, ErrorMessage = "{0} max. {1} karakter olmalı.")]
+        public string SurName { get; set; }
+
         [DisplayName("Kullanıcı Adı"),
          Required(ErrorMessage = "{0} alanı boş geçilemez."), 
          StringLength(30, ErrorMessage = "{0} max. {1} karakter olmalı.")]

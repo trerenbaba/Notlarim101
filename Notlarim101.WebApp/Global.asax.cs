@@ -1,3 +1,5 @@
+using Notlarim101.Common;
+using Notlarim101.WebApp.Init;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,8 @@ namespace Notlarim101.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            App.Common = new WebCommon();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Notlarim101.Core.DataAccess;
+﻿using Notlarim101.Common;
+using Notlarim101.Core.DataAccess;
 using Notlarim101.DataAccessLayer;
 using Notlarim101.DataAccessLayer.Abstract;
 using Notlarim101.Entity;
@@ -45,7 +46,7 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
                 DateTime now = DateTime.Now;
                 o.CreatedOn = now;
                 o.ModifiedOn = now;
-                o.ModifiedUsername = "system"; 
+                o.ModifiedUsername = App.Common.GetCurrentUsername(); //"system"; // common katmanında sessiondan alıp buraya getirdik.
             }
             return Save();
         }
@@ -56,7 +57,7 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
                 MyEntityBase o = obj as MyEntityBase;
                 DateTime now = DateTime.Now;
                 o.ModifiedOn = now;
-                o.ModifiedUsername = "system";
+                o.ModifiedUsername = App.Common.GetCurrentUsername(); //"system"; // common katmanında sessiondan alıp buraya getirdik.
             }
             return Save();
         }

@@ -134,6 +134,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Init\WebCommon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +187,10 @@
     <ProjectReference Include="..\Notlarim101.BusinessLayer\Notlarim101.BusinessLayer.csproj">
       <Project>{d121a2a1-5f31-4830-a4e9-703133336d93}</Project>
       <Name>Notlarim101.BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notlarim101.Common\Notlarim101.Common.csproj">
+      <Project>{2125540f-c690-43bb-aa80-41bf356eb5a5}</Project>
+      <Name>Notlarim101.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Notlarim101.Entity\Notlarim101.Entity.csproj">
       <Project>{cae990a8-0688-4aba-9c30-25ca142670bf}</Project>

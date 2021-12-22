@@ -35,23 +35,26 @@ body {
         z-index: 2;
     }
 
-    .form-signin input[type="email"] {
+/* .form-signin input[type="email"] {
         margin-bottom: -1px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
 
     .form-signin input[type="password"] {
-        margin-bottom: 10px;
+        margin-bottom: -1px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
-    }
+    }*/
+#floatingRePassword {
+    margin-bottom: 10px;
+}
 
-    .validation-summary-errors {
+.validation-summary-errors {
     border: 2px dotted #a94442;
     background-color: #d76663;
     border-radius: 8px;
-    }
+}
 
     .validation-summary-errors ul {
         list-style-type: none;

@@ -12,15 +12,21 @@
             <form>
                 <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
                 <h1 class="h3 mb-3 fw-normal">Giriş Formu</h1>
-                
+
                 @Html.ValidationSummary(false)
+
+                @if (ViewBag.SetLink != null)
+                {
+                    <a href="@ViewBag.SetLink" class="btn btn-primary">Activate</a>
+                }
+
                 <div class="form-floating">
-                    @Html.TextBoxFor(model => model.UserName, new {@class="form-control",placeholder="Kullanıcı Adı", id="floatingInput"})
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Kullanıcı Adı", id = "floatingInput" })
                     @*<input type="email" class="form-control" id="floatingInput" placeholder="Kullanıcı Adı">*@
                     <label for="floatingInput">Kullanıcı Adı</label>
                 </div>
                 <div class="form-floating">
-                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre", id = "floatingPassword", type="password" })
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Şifre", id = "floatingPassword", type = "password" })
                     @*<input type="password" class="form-control" id="floatingPassword" placeholder="Şifre">*@
                     <label for="floatingPassword">Şifre</label>
                 </div>
