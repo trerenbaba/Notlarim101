@@ -17,10 +17,35 @@ namespace Notlarim101.BusinessLayer
         //Kullanıcı username kontrolü yapmalıyım.
         //kullanıcı email kontrolü yapmalıyım.
         //kayıt işlemini gercekleştirmeliyim.
-        //Activasyon e-postası gönderimi yapmalıyım.
+        //Activasyon e-postası gönderimi yapmalıyım. 
 
         Repository<NotlarimUser> ruser = new Repository<NotlarimUser>();
-        
+
+        public BusinessLayerResult<NotlarimUser> LoginUser(LoginViewModel data)
+        {
+            //Giris kontrolü
+            //Hesap aktif edilmiş mi kontrolü
+
+            BusinessLayerResult<NotlarimUser> res = new BusinessLayerResult<NotlarimUser>();
+            res.Result = ruser.Find(s => s.UserName == data.UserName && s.Password == data.Password);
+            if (res.Result != null)
+            {
+                if (!res.Result.IsActive)
+                {
+
+                    res.AddError(ErrorMessageCode.UserIsNotActive, "Kullanıcı adı aktifleştirilmemiş!!!");
+                    res.AddError(ErrorMessageCode.CheckYourEmail, "Lütfen mailinizi kontrol edin.");
+
+                }
+            }
+            else
+            {
+                res.AddError(ErrorMessageCode.UsernameOrPasswordWrong, "kullanıcı adı yada şifre uyuşmuyor.");
+            }
+            return res;
+
+        }
+
         public BusinessLayerResult<NotlarimUser> RegisterUser(RegisterViewModel data)
         {
            NotlarimUser user= ruser.Find(s => s.UserName == data.Username && s.Email==data.Email);
@@ -46,6 +71,7 @@ namespace Notlarim101.BusinessLayer
                     UserName = data.Username,
                     Email=data.Email,
                     Password=data.Password,
+                    ProfileImageFilename="User.png",
                     ActivateGuid=Guid.NewGuid(),
                     IsActive=false,
                     IsAdmin=false,
@@ -54,11 +80,11 @@ namespace Notlarim101.BusinessLayer
                     //CreatedOn=DateTime.Now,
                     //ModifiedUsername="system"
                     
-                });
+                });;
 
                 if (dbResult > 0)
                 {
-                    lr.Result = ruser.Find(s => s.Email == data.Email && s.UserName == data.Username);
+                    lr.Result = ruser.Find(s => s.Email == data.Email || s.UserName == data.Username);
                     string siteUri = ConfigHelper.Get<string>("SiteRootUri");
                     string activateUri = $"{siteUri}/Home/UserActivate/{lr.Result.ActivateGuid}";
                     string body = $"Merhaba {lr.Result.UserName}; <br><br> Hesabınızı aktifleştirmek için <a href='{activateUri}' target='_blank'>tıklayın</a>.";
@@ -71,32 +97,7 @@ namespace Notlarim101.BusinessLayer
 
             return lr;
         }
-
-        public BusinessLayerResult<NotlarimUser> LoginUser(LoginViewModel data)
-        {
-            //Giris kontrolü
-            //Hesap aktif edilmiş mi kontrolü
-           
-            BusinessLayerResult<NotlarimUser> res = new BusinessLayerResult<NotlarimUser>();
-            res.Result = ruser.Find(s => s.UserName == data.UserName || s.Password == data.Password);
-            if (res.Result!=null)
-            {
-                if (!res.Result.IsActive)
-                {
-                   
-                    res.AddError(ErrorMessageCode.UserIsNotActive, "Kullanıcı adı aktifleştirilmemiş!!!");
-                    res.AddError(ErrorMessageCode.CheckYourEmail, "Lütfen mailinizi kontrol edin.");
-                    
-                }
-            }
-            else
-            {
-                res.AddError(ErrorMessageCode.UsernameOrPasswordWrong, "kullanıcı adı yada şifre uyuşmuyor.");
-            }
-            return res;
-
-        }
-
+  
         public BusinessLayerResult<NotlarimUser> ActivateUser(Guid id) //Route.config id yazdığı için id yazıyoruz. Başka isim yazarsak kabul etmiyor.
         {
             BusinessLayerResult<NotlarimUser> res = new BusinessLayerResult<NotlarimUser>();
@@ -120,5 +121,15 @@ namespace Notlarim101.BusinessLayer
 
         }
 
+        public BusinessLayerResult<NotlarimUser> GetUserById(int id)
+        {
+            BusinessLayerResult<NotlarimUser> res = new BusinessLayerResult<NotlarimUser>();
+            res.Result = ruser.Find(s => s.Id == id);
+            if (res.Result==null)
+            {
+                res.AddError(ErrorMessageCode.UserNotFound, "Kullanıcı bulunamadı");
+            }
+            return res;
+        }
     }
 }

@@ -19,10 +19,11 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
                 Surname = "Baba",
                 Email = "babaeren57@gmail.com",
                 ActivateGuid = Guid.NewGuid(),
-                IsActive=true,
-                IsAdmin=true,
-                UserName="erenbaba",
-                Password="123456",
+                IsActive = true,
+                IsAdmin = true,
+                UserName = "erenbaba",
+                Password = "123456",
+                ProfileImageFilename = "User1.png",
                 CreatedOn=DateTime.Now,
                 ModifiedOn=DateTime.Now,
                 ModifiedUsername="erenbaba"
@@ -38,6 +39,7 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
                 IsAdmin = false,
                 UserName = "emrebaba",
                 Password = "654321",
+                ProfileImageFilename= "User1.png",
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now,
                 ModifiedUsername = "emrebaba"
@@ -57,6 +59,7 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
                     IsAdmin = false,
                     UserName = $"user-{i}",
                     Password = "123",
+                    ProfileImageFilename= "User1.png",
                     CreatedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1),DateTime.Now),
                     ModifiedOn = FakeData.DateTimeData.GetDatetime(DateTime.Now.AddYears(-1), DateTime.Now),
                     ModifiedUsername = $"user-{i}"

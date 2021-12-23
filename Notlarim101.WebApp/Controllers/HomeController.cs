@@ -2,6 +2,7 @@
 using Notlarim101.Entity;
 using Notlarim101.Entity.Messages;
 using Notlarim101.Entity.ValueObject;
+using Notlarim101.WebApp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -154,7 +155,14 @@ namespace Notlarim101.WebApp.Controllers
                 //{
                 //    return RedirectToAction("RegisterOk");
                 //}
-                return RedirectToAction("RegisterOk");
+
+                OkViewModel notifyObj = new OkViewModel
+                {
+                    Title = "Kayıt Başarılı",
+                    RedirectingUrl = "/Home/Login",
+                };
+                notifyObj.Items.Add("Lütfen e-posta adresinize gönderdiğimiz aktivasyon linkine tıklayarak hesabınızı aktive ediniz. Hesabınızı aktive etmeden not ekleyemez ve beğenme yapamazsınız.");
+                return View("Ok",notifyObj);
             }
             return View(model);
         }
@@ -191,6 +199,54 @@ namespace Notlarim101.WebApp.Controllers
             }
             return View(errors);
         }
+
+        public ActionResult ShowProfile()
+        {
+            NotlarimUser currentUser = Session["login"] as NotlarimUser;
+            NotlarimUserManager num = new NotlarimUserManager();
+            BusinessLayerResult<NotlarimUser> res = num.GetUserById(currentUser.Id);
+
+            if (res.Errors.Count>0)
+            {
+                //kullanıcıyı bir hata ekranına yönlendireceğim.
+            }
+
+            return View(res.Result);
+        }
+        public ActionResult EditProfile()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult EditProfile(int id)
+        {
+            return View();
+        }
+         public ActionResult DeleteProfile()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult DeleteProfile(int id)
+        {
+            return View();
+        }
+
+        //public ActionResult TestNotify()
+        //{
+        //    ErrorViewModel model = new ErrorViewModel()
+        //    {
+        //        Heeader = "Yönlendirme",
+        //        Title = "Başaraılı",
+        //        RedirectingTimeout = 10000,
+        //        Items = new List<ErrorMessageObj>() {
+        //            new ErrorMessageObj(){Message="Test başarılı 1"},
+        //            new ErrorMessageObj(){Message="Test başarılı 2"},
+        //        }
+        //    };
+        //    return View("Error", model);
+        //}
+
         public ActionResult Logout()
         {
             Session.Clear();
