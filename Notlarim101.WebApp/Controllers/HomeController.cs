@@ -77,9 +77,9 @@ namespace Notlarim101.WebApp.Controllers
             {
                 NotlarimUserManager num = new NotlarimUserManager();
                 BusinessLayerResult<NotlarimUser> res = num.LoginUser(model);
-                if (res.Errors.Count>0)
+                if (res.Errors.Count > 0)
                 {
-                    if (res.Errors.Find(x=>x.Code==ErrorMessageCode.UserIsNotActive)!=null)
+                    if (res.Errors.Find(x => x.Code == ErrorMessageCode.UserIsNotActive) != null)
                     {
                         ViewBag.SetLink = "https://Home/UserActivate/1234-2345-234567";
                     }
@@ -87,14 +87,14 @@ namespace Notlarim101.WebApp.Controllers
                     return View(model);
                 }
                 //yönlendirme
-                
+
                 Session["login"] = res.Result; //session a kullanıcı bilgilerini aktarma
                 return RedirectToAction("Index"); //yonlendirme
 
             }
             return View(model);
         }
-        
+
         public ActionResult Register()
         {
             return View();
@@ -108,7 +108,7 @@ namespace Notlarim101.WebApp.Controllers
                 NotlarimUserManager num = new NotlarimUserManager();
                 BusinessLayerResult<NotlarimUser> res = num.RegisterUser(model);
 
-                if (res.Errors.Count>0)
+                if (res.Errors.Count > 0)
                 {
                     res.Errors.ForEach(s => ModelState.AddModelError("", s.Message));
                     return View(model);
@@ -162,7 +162,7 @@ namespace Notlarim101.WebApp.Controllers
                     RedirectingUrl = "/Home/Login",
                 };
                 notifyObj.Items.Add("Lütfen e-posta adresinize gönderdiğimiz aktivasyon linkine tıklayarak hesabınızı aktive ediniz. Hesabınızı aktive etmeden not ekleyemez ve beğenme yapamazsınız.");
-                return View("Ok",notifyObj);
+                return View("Ok", notifyObj);
             }
             return View(model);
         }
@@ -177,7 +177,7 @@ namespace Notlarim101.WebApp.Controllers
         {
             NotlarimUserManager num = new NotlarimUserManager();
             BusinessLayerResult<NotlarimUser> res = num.ActivateUser(id);
-            if (res.Errors.Count>0)
+            if (res.Errors.Count > 0)
             {
                 TempData["errors"] = res.Errors;
                 return RedirectToAction("UserActivateCancel");
@@ -193,7 +193,7 @@ namespace Notlarim101.WebApp.Controllers
         public ActionResult UserActivateCancel()
         {
             List<ErrorMessageObj> errors = null;
-            if (TempData["errors"]!=null)
+            if (TempData["errors"] != null)
             {
                 errors = TempData["errors"] as List<ErrorMessageObj>;
             }
@@ -206,7 +206,7 @@ namespace Notlarim101.WebApp.Controllers
             NotlarimUserManager num = new NotlarimUserManager();
             BusinessLayerResult<NotlarimUser> res = num.GetUserById(currentUser.Id);
 
-            if (res.Errors.Count>0)
+            if (res.Errors.Count > 0)
             {
                 //kullanıcıyı bir hata ekranına yönlendireceğim.
             }
@@ -215,22 +215,76 @@ namespace Notlarim101.WebApp.Controllers
         }
         public ActionResult EditProfile()
         {
-            return View();
+            NotlarimUser currentUser = Session["login"] as NotlarimUser;
+            NotlarimUserManager num = new NotlarimUserManager();
+            BusinessLayerResult<NotlarimUser> res = num.GetUserById(currentUser.Id);
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                {
+                    Title = "Hata oluştu",
+                    Items = res.Errors,
+                };
+                return View("Error", errorNotifyObj);
+            }
+            return View(res.Result);
         }
+
         [HttpPost]
-        public ActionResult EditProfile(int id)
+        public ActionResult EditProfile(NotlarimUser model, HttpPostedFileBase ProfileImage)
         {
-            return View();
+            ModelState.Remove("ModifiedUsername");
+            if (ModelState.IsValid)
+            {
+                if (ProfileImage != null &&
+                    (ProfileImage.ContentType == "image/jpeg" ||
+                     ProfileImage.ContentType == "image/jpg" ||
+                     ProfileImage.ContentType == "image/png"
+                    ))
+                {
+                    string filename = $"user_{model.Id}.{ProfileImage.ContentType.Split('/')[1]}";
+                    ProfileImage.SaveAs(Server.MapPath($"~/Images/{filename}"));
+                    model.ProfileImageFilename = filename;
+                }
+                NotlarimUserManager num = new NotlarimUserManager();
+                BusinessLayerResult<NotlarimUser> res = num.UpdateProfile(model);
+                if (res.Errors.Count > 0)
+                {
+                    ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                    {
+                        Title = "Profile Güncellenemedi!!!",
+                        Items = res.Errors,
+                        RedirectingUrl="/Home/EditProfile"
+                    };
+                    return View("Error", errorNotifyObj);
+                }
+                Session["login"] = res.Result;
+                return RedirectToAction("ShowProfile");
+            }
+            return View(model);
         }
-         public ActionResult DeleteProfile()
+        public ActionResult DeleteProfile()
         {
-            return View();
+            NotlarimUser currentUser = Session["login"] as NotlarimUser;
+            NotlarimUserManager num = new NotlarimUserManager();
+            BusinessLayerResult<NotlarimUser> res = num.RemoveUserById(currentUser.Id);
+            if (res.Errors.Count > 0)
+            {
+                ErrorViewModel errorNotifyObj = new ErrorViewModel()
+                {
+                    Title = "Profil Silinemedi",
+                    Items = res.Errors,
+                };
+                return View("Error", errorNotifyObj);
+            }
+            Session.Clear();
+            return RedirectToAction("Index");
         }
-        [HttpPost]
-        public ActionResult DeleteProfile(int id)
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult DeleteProfile(int id)
+        //{
+        //    return View();
+        //}
 
         //public ActionResult TestNotify()
         //{
