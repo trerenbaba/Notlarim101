@@ -19,7 +19,7 @@ namespace Notlarim101.BusinessLayer.Abstract
 
         public virtual T Find(Expression<Func<T, bool>> find)
         {
-            return repo.Find(find);
+            return repo.Find(find); 
         }
 
         public virtual int Insert(T obj)
@@ -37,9 +37,9 @@ namespace Notlarim101.BusinessLayer.Abstract
             return repo.List(where);
         }
 
-        public virtual IQueryable<T> QList(Expression<Func<T, bool>> query)
+        public virtual IQueryable<T> QList()
         {
-            return repo.QList(query);
+            return repo.QList();
         }
 
         public virtual int Save()

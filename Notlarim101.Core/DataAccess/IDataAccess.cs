@@ -11,7 +11,7 @@ namespace Notlarim101.Core.DataAccess
     {
         List<T> List();
         List<T> List(Expression<Func<T, bool>> where);
-        IQueryable<T> QList(Expression<Func<T, bool>> query);
+        IQueryable<T> QList();
         int Insert(T obj);
         int Update(T obj);
         int Delete(T obj);

@@ -1,7 +1,6 @@
 ﻿using Notlarim101.Common;
 using Notlarim101.Core.DataAccess;
 using Notlarim101.DataAccessLayer;
-using Notlarim101.DataAccessLayer.Abstract;
 using Notlarim101.Entity;
 using System;
 using System.Collections.Generic;
@@ -31,9 +30,9 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
         {
             return objSet.Where(where).ToList();
         }
-        public IQueryable<T> QList(Expression<Func<T, bool>> query)
+        public IQueryable<T> QList()
         {
-            return objSet.Where(query);
+            return objSet.AsQueryable<T>(); //AsQueryable queryable gibi davran demekmiş.
         }
 
         public int Insert(T obj)
