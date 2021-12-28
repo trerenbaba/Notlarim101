@@ -18,8 +18,11 @@ namespace Notlarim101.Entity
         public bool IsDraft { get; set; }
         public int LikeCount { get; set; }
 
-        public virtual NotlarimUser Owner { get; set; }
+        public int CategoryId { get; set; }
 
+        public virtual NotlarimUser Owner { get; set; }
+        
+        [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
         public virtual List<Comment> Comments { get; set; }
