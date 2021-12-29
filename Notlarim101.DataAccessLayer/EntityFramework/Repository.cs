@@ -33,7 +33,7 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
         public IQueryable<T> QList()
         {
             return objSet.AsQueryable<T>(); //AsQueryable queryable gibi davran demekmiş.
-        }
+        } 
 
         public int Insert(T obj)
         {
