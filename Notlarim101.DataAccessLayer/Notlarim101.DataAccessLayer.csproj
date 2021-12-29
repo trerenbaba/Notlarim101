@@ -57,19 +57,6 @@
     <Compile Include="EntityFramework\NotlarimContext.cs" />
     <Compile Include="EntityFramework\Repository.cs" />
     <Compile Include="EntityFramework\RepositoryBase.cs" />
-    <Compile Include="Migrations\202112230742278_InitialCreate.cs" />
-    <Compile Include="Migrations\202112230742278_InitialCreate.Designer.cs">
-      <DependentUpon>202112230742278_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202112240924548_EntityEkleme.cs" />
-    <Compile Include="Migrations\202112240924548_EntityEkleme.Designer.cs">
-      <DependentUpon>202112240924548_EntityEkleme.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202112240935245_selamlamaSil.cs" />
-    <Compile Include="Migrations\202112240935245_selamlamaSil.Designer.cs">
-      <DependentUpon>202112240935245_selamlamaSil.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,17 +76,6 @@
       <Project>{cae990a8-0688-4aba-9c30-25ca142670bf}</Project>
       <Name>Notlarim101.Entity</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112230742278_InitialCreate.resx">
-      <DependentUpon>202112230742278_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202112240924548_EntityEkleme.resx">
-      <DependentUpon>202112240924548_EntityEkleme.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202112240935245_selamlamaSil.resx">
-      <DependentUpon>202112240935245_selamlamaSil.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />
