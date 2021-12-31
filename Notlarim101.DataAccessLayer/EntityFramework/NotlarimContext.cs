@@ -1,20 +1,21 @@
-﻿using Notlarim101.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Notlarim101.Entity;
 
 namespace Notlarim101.DataAccessLayer.EntityFramework
 {
-    public class NotlarimContext:DbContext
+    public class NotlarimContext : DbContext
     {
         public DbSet<NotlarimUser> NotlarimUsers { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Liked> Likes { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<NotlarimUser>()
@@ -33,21 +34,24 @@ namespace Notlarim101.DataAccessLayer.EntityFramework
                 .WithRequired(n => n.Category)
                 .WillCascadeOnDelete(true);
 
+
             modelBuilder.Entity<Note>()
                 .HasMany(n => n.Comments)
                 .WithRequired(n => n.Note)
-                .HasForeignKey(n => n.NoteId);
-                //.WillCascadeOnDelete(true);
-
+                .HasForeignKey(v => v.NoteId)
+                .WillCascadeOnDelete(true);
+            ;
             modelBuilder.Entity<Note>()
                 .HasMany(n => n.Likes)
                 .WithRequired(n => n.Note)
                 .WillCascadeOnDelete(true);
+
         }
+
+
         public NotlarimContext()
         {
             Database.SetInitializer(new MyInitializer());
         }
-
     }
 }

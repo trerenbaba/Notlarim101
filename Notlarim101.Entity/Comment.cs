@@ -9,15 +9,19 @@ using System.Threading.Tasks;
 namespace Notlarim101.Entity
 {
     [Table("tblComments")]
-    public class Comment:MyEntityBase
+    public class Comment : MyEntityBase
     {
-        [Required,StringLength(300)]
+        [Required, StringLength(300)]
         public string Text { get; set; }
+
         [ForeignKey("Note")]
-        public int NoteId { get; set; }
+        public int? NoteId { get; set; }
+
+        [ForeignKey("Owner")]
+        public int? OwnerId { get; set; }
+
         public virtual Note Note { get; set; }
         public virtual NotlarimUser Owner { get; set; }
-
 
     }
 }
